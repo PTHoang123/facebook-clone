@@ -11,103 +11,45 @@
 
 </head>
 <body>
-    <div class="temp"></div>
-    <div class="first-block"></div>
-    <div class="second-block"></div>
-      <div class="loader">
-          <ul>
-             <li>L</li>
-             <li>O</li>
-             <li>A</li>
-             <li>D</li>
-             <li>I</li>
-             <li>N</li>
-             <li>G</li>
-          </ul>
-      </div>
-    <div class="third-block"></div>
-    <div class="menu">
-        <ion-icon name="menu"></ion-icon>
-    </div>
-     <div class="logo">
-         <span>Explore</span>
-     </div>
-     <div class="content">
-         <div class="heading">
-             <span>Faroe Island</span>
-         </div>
-         <div class="desc">
-             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ea? Ut eius eum et adipisci. Eos laudantium, nobis itaque in accusantium officiis quaerat quas explicabo magnam.</p>
+    <div class="nav-wrapper">
+        <nav>
+              <a href="#" class="hover-this"><span>Home</span></a>
+              <a href="#" class="hover-this"><span>Our Story</span></a>
+              <a href="#" class="hover-this"><span>Studio</span></a>
+              <a href="#" class="hover-this"><span>Contact</span></a>
+              <div class="cursor"></div>
+        </nav>
+  </div>
+    <script>
+       (function () {
 
-         </div>
-         <div class="link">
-             <button type="button">Visit  Now</button>
-         </div>
-     </div>
-     <div class="img">
-        <img src="/images/hero.jpg" >
-         
-     </div>
-     <div class="media">
-         <ul>
-             <li><ion-icon name="logo-facebook"></ion-icon></li>
-             <li><ion-icon name="logo-instagram"></ion-icon></li>
-             <li><ion-icon name="logo-twitter"></ion-icon></li>
-         </ul>
-     </div>
-     <div class="watch">
-       <ion-icon name="play"></ion-icon>
-     </div>
+const link = document.querySelectorAll('nav > .hover-this');
+const cursor = document.querySelector('.cursor');
 
-     <script type="text/javascript">
-    TweenMax.from(".logo", 1.6 , {
-        delay: 6.4,
-        opacity: 0,
-        y: 30,
-        ease: Expo.easeInOut
-    });
+const animateit = function (e) {
+            const span = this.querySelector('span');
+            const { offsetX: x, offsetY: y } = e,
+            { offsetWidth: width, offsetHeight: height } = this,
 
-   
-    TweenMax.from(".menu", 1.6 , {
-        delay: 6.6,
-        opacity: 0,
-        y: 30,
-        ease: Expo.easeInOut
-    });
-    TweenMax.from(".heading", 1.6 , {
-        delay: 6.6,
-        opacity: 0,
-        y: 30,
-        ease: Expo.easeInOut
-    });
+            move = 25,
+            xMove = x / width * (move * 2) - move,
+            yMove = y / height * (move * 2) - move;
 
-    TweenMax.from(".desc", 1.6 , {
-        delay: 6.7,
-        opacity: 0,
-        y: 30,
-        ease: Expo.easeInOut
-    });
-    TweenMax.from("button", 1.6 , {
-        delay: 6.8,
-        opacity: 0,
-        y: 30,
-        ease: Expo.easeInOut
-    });
-    TweenMax.from(".watch", 1.6 , {
-        delay: 6.9,
-        opacity: 0,
-        y: 30,
-        rotation: 90,
-        ease: Expo.easeInOut
-    });
-    TweenMax.staggerFrom(".media ul li", 2 , {
-        delay: 7,
-        opacity: 0,
-        y: 40,
-        ease: Expo.easeInOut
-    }, 0.2);
+            span.style.transform = `translate(${xMove}px, ${yMove}px)`;
 
+            if (e.type === 'mouseleave') span.style.transform = '';
+      };
+const editCursor = e => {
+      const { clientX: x, clientY: y } = e;
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+};
+link.forEach(b => b.addEventListener('mousemove', animateit));
+link.forEach(b => b.addEventListener('mouseleave', animateit));
 
-  </script>
+document.addEventListener('mousemove', editCursor);
+
+})();
+    </script>
 </body>
 </html>
